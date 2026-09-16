@@ -75,3 +75,6 @@ public class Main {
         return choice;
     }
 }
+/*llm prompt used: how do i make something run in java and then import it to github
+when it is telling me to use git bash and it is not working? sorry first time on java and github
+ChatGPT on 09/15/2026 */
