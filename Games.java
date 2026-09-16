@@ -1,18 +1,17 @@
-/*
- * name: your name
- * date: your date
- * program: lab 3 - games part 2
- *
- * llm prompt used:
- * "help me update my java games assignment while keeping
- * my original code and comments, and follow the assignment
- * requirements for craps, scraps, and rock paper scissors."
- */
 
 import java.util.Random;
 import java.util.Scanner;
 
 public class Games {
+    /*
+    *
+    *
+    * 
+    * LOTTERY GAME
+    * 
+    * 
+    * 
+    */
 
     //PRE:  accepts scanner from main
     //POST: asks the user for a 2 digit # & compares the
@@ -37,7 +36,7 @@ public class Games {
  
 
         // Step 3: Ensure it's a valid two-digit number
-        while (userGuess < 10 || userGuess > 99) {
+        while (userGuess < 10 || userGuess > 99) { //BETWEEN 10 AND 99
             System.out.print("Invalid input. Please enter a two-digit number (10-99): ");
             userGuess = input.nextInt();
         }
@@ -71,9 +70,18 @@ public class Games {
             System.out.println("Sorry, no match.");
         }
  
-        // clear the leftover enter
+        // CLEAR the input buffer
         input.nextLine();
     }
+      /*
+    *
+    *
+    * 
+    * CRAPS GAME
+    * 
+    * 
+    * 
+    */
 
 
     //PRE:  accepts scanner from main
@@ -97,7 +105,7 @@ public class Games {
         System.out.println("You rolled: " + die1 + " and " + die2);
         System.out.println("Sum: " + total);
 
-        // check for an immediate win
+        // check for an immediate wins
         if (total == 7 || total == 11) {
             System.out.println("You win!");
         }
@@ -107,7 +115,7 @@ public class Games {
             System.out.println("You lose!");
         }
 
-        // all other totals establish the point
+        // other numbers establish a point system
         else {
             int point = total;
 
@@ -144,6 +152,15 @@ public class Games {
 
         System.out.println("Thanks for playing!");
     }
+      /*
+    *
+    *
+    * 
+    * SCRAPS GAME
+    * 
+    * 
+    * 
+    */
 
 
     //PRE: accepts scanner from main
@@ -172,6 +189,8 @@ public class Games {
         int die3 = rand.nextInt(8) + 1;
 
         int sum = die1 + die2 + die3;
+        /* llm prompt used: how do i check if one of the dice is 8, or if the sum is 9, 10, or 14, or if one of the dice is 1, or if the sum is 8, 20, 23, or 24 in Java?
+        ChatGPT on 09/15/2026 */
 
         System.out.println("You rolled: " + die1 + ", " + die2 + ", " + die3);
         System.out.println("Sum: " + sum);
@@ -259,7 +278,15 @@ public class Games {
 
         System.out.println("Thanks for playing Scraps!");
     }
-
+  /*
+    *
+    *
+    * 
+    * Rock, Paper, Scissors GAME
+    * 
+    * 
+    * 
+    */
 
     //PRE: accepts scanner from main
     //POST: plays Rock, Paper, Scissors

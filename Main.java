@@ -1,12 +1,10 @@
 /*
- * name: your name
- * date: your date
- * program: lab 3 - games part 2
- *
+ * Angelina Tran
+ * 09/15/2026
+ * Lab 3
  * llm prompt used:
- * "help me update my java games assignment while keeping
- * my original code and comments, and follow the assignment
- * requirements for craps, scraps, and rock paper scissors."
+ * "how do I implement the main method for a game menu in Java?"
+ * Access ChatGPT on 09/15/2026
  */
 
 import java.util.Scanner;
@@ -20,7 +18,7 @@ public class Main {
         choice = menu(scanInput);
         
         while (choice != 'Q'){
-            //test for choice type and call appropriate Game
+            //test for choice type and call Game
             if (choice == 'L')
                 Games.lotteryGame(scanInput);
 
