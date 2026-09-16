@@ -1,3 +1,14 @@
+/*
+ * name: your name
+ * date: your date
+ * program: lab 3 - games part 2
+ *
+ * llm prompt used:
+ * "help me update my java games assignment while keeping
+ * my original code and comments, and follow the assignment
+ * requirements for craps, scraps, and rock paper scissors."
+ */
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -16,28 +27,54 @@ public class Games {
 
         // Step 1: Generate a random two-digit lottery number (10 to 99)
         //         && set the 2 digits of lottery number 
+        int lotteryNumber = rand.nextInt(90) + 10;
+        int lotteryDigit1 = lotteryNumber / 10;
+        int lotteryDigit2 = lotteryNumber % 10;
 
-        // Step 2: Prompt the user to enter a two-digit number
+        // Step 2: Prompt user for a two-digit number
+        System.out.print("Enter a two-digit number: ");
+        int userGuess = input.nextInt();
  
 
-        // Step 3:Ensure it's a valid two-digit number
- 
+        // Step 3: Ensure it's a valid two-digit number
+        while (userGuess < 10 || userGuess > 99) {
+            System.out.print("Invalid input. Please enter a two-digit number (10-99): ");
+            userGuess = input.nextInt();
+        }
+
         // Step 4: get the 2 digits of userGuess
+        int userDigit1 = userGuess / 10;
+        int userDigit2 = userGuess % 10;
 
         // Step 5: Display lottery number
- 
+        System.out.println("The lottery number is: " + lotteryNumber);
 
         // Step 6: Check for types of matches & print results
         // exact match
- 
+        if (userGuess == lotteryNumber) {
+            System.out.println("Exact match: You win $10000!");
+        }
+
         // Step 7: Check for all digits match (in different order)
- 
+        else if ((userDigit1 == lotteryDigit2 && userDigit2 == lotteryDigit1)) {
+            System.out.println("All digits match: You win $3000!");
+        }
+        
         // Step 8: Check for one digit match
+        else if (userDigit1 == lotteryDigit1 || userDigit1 == lotteryDigit2 ||
+                 userDigit2 == lotteryDigit1 || userDigit2 == lotteryDigit2) {
+            System.out.println("Match one digit: You win $1000!");
+        }
  
         // Step 9: No match
+        else {
+            System.out.println("Sorry, no match.");
+        }
  
-
+        // clear the leftover enter
+        input.nextLine();
     }
+
 
     //PRE:  accepts scanner from main
     //POST: while the user chooses to play:
@@ -48,13 +85,265 @@ public class Games {
     public static void playCraps(Scanner input) {
         System.out.println("\nWELCOME TO CRAPS!!\n");
 
+        // create random number generator
+        Random rand = new Random();
 
+        // roll two six-sided dice
+        int die1 = rand.nextInt(6) + 1;
+        int die2 = rand.nextInt(6) + 1;
+        int total = die1 + die2;
 
+        // display the first roll
+        System.out.println("You rolled: " + die1 + " and " + die2);
+        System.out.println("Sum: " + total);
+
+        // check for an immediate win
+        if (total == 7 || total == 11) {
+            System.out.println("You win!");
+        }
+
+        // check for an immediate loss
+        else if (total == 2 || total == 3 || total == 12) {
+            System.out.println("You lose!");
+        }
+
+        // all other totals establish the point
+        else {
+            int point = total;
+
+            System.out.println("Point is " + point);
+
+            boolean playing = true;
+
+            // keep rolling until the point or 7 is rolled
+            while (playing) {
+
+                die1 = rand.nextInt(6) + 1;
+                die2 = rand.nextInt(6) + 1;
+                total = die1 + die2;
+
+                // display every roll
+                System.out.println("You rolled: " + die1 + " and " + die2);
+                System.out.println("Sum: " + total);
+
+                // rolling the point means the player wins
+                if (total == point) {
+                    System.out.println("You rolled the point!");
+                    System.out.println("You win!");
+                    playing = false;
+                }
+
+                // rolling a 7 means the player loses
+                else if (total == 7) {
+                    System.out.println("You rolled a 7!");
+                    System.out.println("You lose!");
+                    playing = false;
+                }
+            }
+        }
 
         System.out.println("Thanks for playing!");
+    }
 
+
+    //PRE: accepts scanner from main
+    //POST: plays the game using three 8-sided dice
+    public static void playScraps(Scanner input) {
+
+        /*
+         * pseudocode:
+         * roll three eight-sided dice.
+         * if one die is 8, win.
+         * else if the sum is 9, 10, or 14, win.
+         * else if one die is 1, lose.
+         * else if the sum is 8, 20, 23, or 24, lose.
+         * else set point to the sum of the dice.
+         * keep rolling until the point is rolled,
+         * a single 8 is rolled, or the total is 15.
+         */
+
+        System.out.println("\nWELCOME TO SCRAPS!!\n");
+
+        Random rand = new Random();
+
+        // roll three eight-sided dice
+        int die1 = rand.nextInt(8) + 1;
+        int die2 = rand.nextInt(8) + 1;
+        int die3 = rand.nextInt(8) + 1;
+
+        int sum = die1 + die2 + die3;
+
+        System.out.println("You rolled: " + die1 + ", " + die2 + ", " + die3);
+        System.out.println("Sum: " + sum);
+
+        // check if one of the dice is 8
+        if (die1 == 8 || die2 == 8 || die3 == 8) {
+            System.out.println("You win!");
+        }
+
+        // check if the sum is 9, 10, or 14
+        else if (sum == 9 || sum == 10 || sum == 14) {
+            System.out.println("You win!");
+        }
+
+        // check if one of the dice is 1
+        else if (die1 == 1 || die2 == 1 || die3 == 1) {
+            System.out.println("You lose!");
+        }
+
+        // check if the sum is 8, 20, 23, or 24
+        else if (sum == 8 || sum == 20 || sum == 23 || sum == 24) {
+            System.out.println("You lose!");
+        }
+
+        // set the point if none of the above happened
+        else {
+            int point = sum;
+
+            System.out.println("Point is set to " + point
+                    + ". Rolling until you hit the point (win) "
+                    + "or roll an 8 or total 15 (lose).");
+
+            boolean playing = true;
+
+            // keep rolling until the game is over
+            while (playing) {
+
+                die1 = rand.nextInt(8) + 1;
+                die2 = rand.nextInt(8) + 1;
+                die3 = rand.nextInt(8) + 1;
+
+                sum = die1 + die2 + die3;
+
+                System.out.println("You rolled: " + die1 + ", "
+                        + die2 + ", " + die3);
+                System.out.println("Sum: " + sum);
+
+                int numberOfEights = 0;
+
+                // count how many eights were rolled
+                if (die1 == 8) {
+                    numberOfEights++;
+                }
+
+                if (die2 == 8) {
+                    numberOfEights++;
+                }
+
+                if (die3 == 8) {
+                    numberOfEights++;
+                }
+
+                // a single 8 means lose
+                if (numberOfEights == 1) {
+                    System.out.println("You rolled a single 8.");
+                    System.out.println("You lose!");
+                    playing = false;
+                }
+
+                // a total of 15 means lose
+                else if (sum == 15) {
+                    System.out.println("You rolled 15.");
+                    System.out.println("You lose!");
+                    playing = false;
+                }
+
+                // rolling the point means win
+                else if (sum == point) {
+                    System.out.println("You rolled the point!");
+                    System.out.println("You win!");
+                    playing = false;
+                }
+            }
+        }
+
+        System.out.println("Thanks for playing Scraps!");
+    }
+
+
+    //PRE: accepts scanner from main
+    //POST: plays Rock, Paper, Scissors
+    public static void playRockPaperScissors(Scanner input) {
+
+        /*
+         * pseudocode:
+         * ask the user to enter rock, paper, or scissors.
+         * computer randomly chooses rock, paper, or scissors.
+         * compare the user's choice to the computer's choice.
+         * if they are the same, it is a tie.
+         * scissors cuts paper.
+         * paper covers rock.
+         * rock crushes scissors.
+         * ask the user if they want to go again.
+         * continue if the user enters Y.
+         */
+
+        System.out.println("\nWELCOME TO ROCK, PAPER, SCISSORS!!\n");
+
+        Random rand = new Random();
+
+        // 0 = Rock, 1 = Paper, 2 = Scissors
+        String[] choices = {"rock", "paper", "scissors"};
+
+        char playAgain = 'Y';
+
+        while (playAgain == 'Y') {
+
+            int computerChoice = rand.nextInt(3);
+
+            String userChoice;
+
+            // prompt user for their choice
+            System.out.print("Enter rock, paper or scissors: ");
+            userChoice = input.nextLine().toLowerCase();
+
+            // make sure the user enters a valid choice
+            while (!userChoice.equals("rock") &&
+                   !userChoice.equals("paper") &&
+                   !userChoice.equals("scissors")) {
+
+                System.out.print("Invalid choice. Enter rock, paper or scissors: ");
+                userChoice = input.nextLine().toLowerCase();
+            }
+
+            System.out.println("Computer chose: " + choices[computerChoice]);
+
+            // check for a tie
+            if (userChoice.equals(choices[computerChoice])) {
+                System.out.println("It's a tie!");
+            }
+
+            // scissors cuts paper
+            else if (userChoice.equals("scissors") && computerChoice == 1) {
+                System.out.println("You win!");
+            }
+
+            // paper covers rock
+            else if (userChoice.equals("paper") && computerChoice == 0) {
+                System.out.println("You win!");
+            }
+
+            // rock crushes scissors
+            else if (userChoice.equals("rock") && computerChoice == 2) {
+                System.out.println("You win!");
+            }
+
+            // otherwise, computer wins
+            else {
+                System.out.println("Computer wins!");
+            }
+
+            // ask if the user wants to play again
+            System.out.print("Would you like to go again? Y or N: ");
+            playAgain = input.nextLine().toUpperCase().charAt(0);
+
+            while (playAgain != 'Y' && playAgain != 'N') {
+                System.out.print("Please enter Y or N: ");
+                playAgain = input.nextLine().toUpperCase().charAt(0);
+            }
+        }
+
+        System.out.println("Thanks for playing Rock, Paper, Scissors!");
     }
 
 }
- 
-
